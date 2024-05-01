@@ -1,14 +1,10 @@
-class Article < ApplicationRecord
-  has_many :comments
+class CreateArticles < ActiveRecord::Migration[7.1]
+  def change
+    create_table :articles do |t|
+      t.string :title
+      t.text :body
 
-  validates :title, presence: true
-  validates :body, presence: true, length: { minimum: 10 }
-
-  VALID_STATUSES = ['public', 'private', 'archived']
-
-  validates :status, inclusion: { in: VALID_STATUSES }
-
-  def archived?
-    status == 'archived'
+      t.timestamps
+    end
   end
 end
